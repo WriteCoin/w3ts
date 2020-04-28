@@ -3,6 +3,82 @@
 import { Handle } from "./handle";
 import { Point } from "./point";
 
+declare interface camerafield extends handle { __camerafield: never; }
+declare interface agent extends handle { __agent: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+declare interface location extends agent { __location: never; }
+declare interface camerasetup extends handle { __camerasetup: never; }
+declare interface blendmode extends handle { __blendmode: never; }
+declare interface texmapflags extends handle { __texmapflags: never; }
+declare interface playercolor extends handle { __playercolor: never; }
+
+declare function SetCameraPosition(x: number, y: number): void;
+declare function SetCameraQuickPosition(x: number, y: number): void;
+declare function SetCameraBounds(x1: number, y1: number, x2: number, y2: number, x3: number, y3: number, x4: number, y4: number): void;
+declare function StopCamera(): void;
+declare function ResetToGameCamera(duration: number): void;
+declare function PanCameraTo(x: number, y: number): void;
+declare function PanCameraToTimed(x: number, y: number, duration: number): void;
+declare function PanCameraToWithZ(x: number, y: number, zOffsetDest: number): void;
+declare function PanCameraToTimedWithZ(x: number, y: number, zOffsetDest: number, duration: number): void;
+declare function SetCinematicCamera(cameraModelFile: string): void;
+declare function SetCameraRotateMode(x: number, y: number, radiansToSweep: number, duration: number): void;
+declare function SetCameraField(whichField: camerafield, value: number, duration: number): void;
+declare function AdjustCameraField(whichField: camerafield, offset: number, duration: number): void;
+declare function SetCameraTargetController(whichUnit: unit, xoffset: number, yoffset: number, inheritOrientation: boolean): void;
+declare function SetCameraOrientController(whichUnit: unit, xoffset: number, yoffset: number): void;
+declare function CreateCameraSetup(): camerasetup;
+declare function CameraSetupSetField(whichSetup: camerasetup, whichField: camerafield, value: number, duration: number): void;
+declare function CameraSetupGetField(whichSetup: camerasetup, whichField: camerafield): number;
+declare function CameraSetupSetDestPosition(whichSetup: camerasetup, x: number, y: number, duration: number): void;
+declare function CameraSetupGetDestPositionLoc(whichSetup: camerasetup): location;
+declare function CameraSetupGetDestPositionX(whichSetup: camerasetup): number;
+declare function CameraSetupGetDestPositionY(whichSetup: camerasetup): number;
+declare function CameraSetupApply(whichSetup: camerasetup, doPan: boolean, panTimed: boolean): void;
+declare function CameraSetupApplyWithZ(whichSetup: camerasetup, zDestOffset: number): void;
+declare function CameraSetupApplyForceDuration(whichSetup: camerasetup, doPan: boolean, forceDuration: number): void;
+declare function CameraSetupApplyForceDurationWithZ(whichSetup: camerasetup, zDestOffset: number, forceDuration: number): void;
+declare function BlzCameraSetupSetLabel(whichSetup: camerasetup, label: string): void;
+declare function BlzCameraSetupGetLabel(whichSetup: camerasetup): string;
+declare function CameraSetTargetNoise(mag: number, velocity: number): void;
+declare function CameraSetSourceNoise(mag: number, velocity: number): void;
+declare function CameraSetTargetNoiseEx(mag: number, velocity: number, vertOnly: boolean): void;
+declare function CameraSetSourceNoiseEx(mag: number, velocity: number, vertOnly: boolean): void;
+declare function CameraSetSmoothingFactor(factor: number): void;
+declare function CameraSetFocalDistance(distance: number): void;
+declare function CameraSetDepthOfFieldScale(scale: number): void;
+declare function SetCineFilterTexture(filename: string): void;
+declare function SetCineFilterBlendMode(whichMode: blendmode): void;
+declare function SetCineFilterTexMapFlags(whichFlags: texmapflags): void;
+declare function SetCineFilterStartUV(minu: number, minv: number, maxu: number, maxv: number): void;
+declare function SetCineFilterEndUV(minu: number, minv: number, maxu: number, maxv: number): void;
+declare function SetCineFilterStartColor(red: number, green: number, blue: number, alpha: number): void;
+declare function SetCineFilterEndColor(red: number, green: number, blue: number, alpha: number): void;
+declare function SetCineFilterDuration(duration: number): void;
+declare function DisplayCineFilter(flag: boolean): void;
+declare function IsCineFilterDisplayed(): boolean;
+declare function SetCinematicScene(portraitUnitId: number, color: playercolor, speakerTitle: string, text: string, sceneDuration: number, voiceoverDuration: number): void;
+declare function EndCinematicScene(): void;
+declare function ForceCinematicSubtitles(flag: boolean): void;
+declare function SetCinematicAudio(cinematicAudio: boolean): void;
+declare function GetCameraMargin(whichMargin: number): number;
+declare function GetCameraBoundMinX(): number;
+declare function GetCameraBoundMinY(): number;
+declare function GetCameraBoundMaxX(): number;
+declare function GetCameraBoundMaxY(): number;
+declare function GetCameraField(whichField: camerafield): number;
+declare function GetCameraTargetPositionX(): number;
+declare function GetCameraTargetPositionY(): number;
+declare function GetCameraTargetPositionZ(): number;
+declare function GetCameraTargetPositionLoc(): location;
+declare function GetCameraEyePositionX(): number;
+declare function GetCameraEyePositionY(): number;
+declare function GetCameraEyePositionZ(): number;
+declare function GetCameraEyePositionLoc(): location;
+declare function BlzCameraSetupApplyForceDurationSmooth(whichSetup: camerasetup, doPan: boolean, forcedDuration: number, easeInDuration: number, easeOutDuration: number, smoothFactor: number): void;
+
+
 export class Camera {
 
   private constructor() { }

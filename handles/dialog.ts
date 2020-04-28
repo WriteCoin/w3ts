@@ -3,6 +3,19 @@
 import { Handle } from "./handle";
 import { MapPlayer } from "./player";
 
+declare interface agent extends handle { __agent: never; }
+declare interface dialog extends agent { __dialog: never; }
+declare interface button extends agent { __button: never; }
+declare interface player extends agent { __player: never; }
+
+declare function DialogCreate(): dialog;
+declare function DialogDestroy(whichDialog: dialog): void;
+declare function DialogClear(whichDialog: dialog): void;
+declare function DialogSetMessage(whichDialog: dialog, messageText: string): void;
+declare function DialogAddButton(whichDialog: dialog, buttonText: string, hotkey: number): button;
+declare function DialogAddQuitButton(whichDialog: dialog, doScoreScreen: boolean, buttonText: string, hotkey: number): button;
+declare function DialogDisplay(whichPlayer: player, whichDialog: dialog, flag: boolean): void;
+
 export class DialogButton extends Handle<button> {
 
   constructor(whichDialog: Dialog, text: string, hotkey: number = 0, quit: boolean = false, score: boolean = false) {

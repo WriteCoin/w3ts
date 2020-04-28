@@ -1,9 +1,8 @@
 {
   "name": "w3ts",
-  "version": "2.1.1",
+  "version": "0.1.0",
   "description": "TypeScript API for Warcraft III custom maps.",
-  "author": "TriggerHappy",
-  "license": "MIT",
+  "author": "WriteCoin",
   "main": "src/index.ts",
   "scripts": {
     "build": "tslint -c tslint.json -p tsconfig.json"
@@ -11,15 +10,14 @@
   "devDependencies": {
     "lua-types": "^2.6.1",
     "tslint": "^6.1.0",
-    "typescript": "^3.8.3",
-    "war3-types": "latest"
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cipherxof/w3ts.git"
+    "url": "git+https://github.com/WriteCoin/w3ts.git"
   },
   "bugs": {
-    "url": "https://github.com/cipherxof/w3ts/issues"
+    "url": "https://github.com/WriteCoin/w3ts/issues"
   },
-  "homepage": "https://github.com/cipherxof/w3ts#readme"
+  "homepage": "https://github.com/WriteCoin/w3ts#readme"
 }

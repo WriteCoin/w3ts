@@ -2,6 +2,19 @@
 
 import { Handle } from "./handle";
 
+declare interface agent extends handle { __agent: never; }
+declare interface timer extends agent { __timer: never; }
+
+declare function CreateTimer(): timer;
+declare function DestroyTimer(whichTimer: timer): void;
+declare function TimerStart(whichTimer: timer, timeout: number, periodic: boolean, handlerFunc: () => void): void;
+declare function TimerGetElapsed(whichTimer: timer): number;
+declare function TimerGetRemaining(whichTimer: timer): number;
+declare function TimerGetTimeout(whichTimer: timer): number;
+declare function PauseTimer(whichTimer: timer): void;
+declare function ResumeTimer(whichTimer: timer): void;
+declare function GetExpiredTimer(): timer;
+
 export class Timer extends Handle<timer> {
 
   constructor() {

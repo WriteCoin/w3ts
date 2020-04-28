@@ -19,15 +19,17 @@
       "lua-types/core/table",
       "lua-types/core/os",
       "lua-types/special/5.3",
-      "war3-types/core/compat",
-      "war3-types/core/common",
-      "war3-types/core/blizzard",
-      "war3-types/core/commonai",
-      "war3-types/core/polyfill",
-      "war3-types/special/w3ts"
     ]
   },
   "include": [
     "./"
-  ]
+  ],
+  "tstl": {
+    "luaTarget": "5.3",
+    "noHeader": true,
+    "luaLibImport": "require",
+    "noImplicitSelf": true,
+    "luaBundle": "dist/tstl_output.lua",
+    "luaBundleEntry": "./index.ts"
+  }
 }

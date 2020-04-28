@@ -1,3 +1,11 @@
+declare function Preload(filename: string): void;
+declare function PreloadGenClear(): void;
+declare function PreloadGenStart(): void;
+declare function PreloadGenEnd(filename: string): void;
+declare function Preloader(filename: string): void;
+declare function BlzSetAbilityIcon(abilCode: number, iconPath: string): void;
+declare function BlzGetAbilityIcon(abilCode: number): string;
+
 export class File {
 
     // The ability used to read and write data.

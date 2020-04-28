@@ -5,6 +5,67 @@ import { MapPlayer } from "./player";
 import { Point } from "./point";
 import { Widget } from "./widget";
 
+declare interface agent extends handle { __agent: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface item extends widget { __item: never; }
+declare interface player extends agent { __player: never; }
+declare interface rect extends agent { __rect: never; }
+declare interface boolexpr extends agent { __boolexpr: never; }
+declare interface itemtype extends handle { __itemtype: never; }
+declare interface itemintegerfield extends handle { __itemintegerfield: never; }
+declare interface itemrealfield extends handle { __itemrealfield: never; }
+declare interface itembooleanfield extends handle { __itembooleanfield: never; }
+declare interface itemstringfield extends handle { __itemstringfield: never; }
+declare interface ability extends agent { __ability: never; }
+
+declare function BlzCreateItemWithSkin(itemid: number, x: number, y: number, skinId: number): item;
+declare function CreateItem(itemid: number, x: number, y: number): item;
+declare function RemoveItem(whichItem: item): void;
+declare function GetItemPlayer(whichItem: item): player;
+declare function GetItemTypeId(i: item): number;
+declare function GetItemX(i: item): number;
+declare function GetItemY(i: item): number;
+declare function SetItemPosition(i: item, x: number, y: number): void;
+declare function SetItemDropOnDeath(whichItem: item, flag: boolean): void;
+declare function SetItemDroppable(i: item, flag: boolean): void;
+declare function SetItemPawnable(i: item, flag: boolean): void;
+declare function SetItemPlayer(whichItem: item, whichPlayer: player, changeColor: boolean): void;
+declare function SetItemInvulnerable(whichItem: item, flag: boolean): void;
+declare function IsItemInvulnerable(whichItem: item): boolean;
+declare function SetItemVisible(whichItem: item, show: boolean): void;
+declare function IsItemVisible(whichItem: item): boolean;
+declare function IsItemOwned(whichItem: item): boolean;
+declare function IsItemPowerup(whichItem: item): boolean;
+declare function IsItemSellable(whichItem: item): boolean;
+declare function IsItemPawnable(whichItem: item): boolean;
+declare function IsItemIdPowerup(itemId: number): boolean;
+declare function IsItemIdSellable(itemId: number): boolean;
+declare function IsItemIdPawnable(itemId: number): boolean;
+declare function EnumItemsInRect(r: rect, filter: boolexpr | null, actionFunc: () => void): void;
+declare function GetItemLevel(whichItem: item): number;
+declare function GetItemType(whichItem: item): itemtype;
+declare function SetItemDropID(whichItem: item, unitId: number): void;
+declare function GetItemName(whichItem: item): string;
+declare function GetItemCharges(whichItem: item): number;
+declare function SetItemCharges(whichItem: item, charges: number): void;
+declare function GetItemUserData(whichItem: item): number;
+declare function SetItemUserData(whichItem: item, data: number): void;
+declare function BlzSetItemName(whichItem: item, name: string): void;
+declare function BlzGetItemSkin(whichItem: item): number;
+declare function BlzSetItemSkin(whichItem: item, skinId: number): void;
+declare function BlzGetItemAbilityByIndex(whichItem: item, index: number): ability;
+declare function BlzGetItemAbility(whichItem: item, abilCode: number): ability;
+declare function BlzItemAddAbility(whichItem: item, abilCode: number): boolean;
+declare function BlzGetItemBooleanField(whichItem: item, whichField: itembooleanfield): boolean;
+declare function BlzGetItemIntegerField(whichItem: item, whichField: itemintegerfield): number;
+declare function BlzGetItemRealField(whichItem: item, whichField: itemrealfield): number;
+declare function BlzGetItemStringField(whichItem: item, whichField: itemstringfield): string;
+declare function BlzSetItemBooleanField(whichItem: item, whichField: itembooleanfield, value: boolean): boolean;
+declare function BlzSetItemIntegerField(whichItem: item, whichField: itemintegerfield, value: number): boolean;
+declare function BlzSetItemRealField(whichItem: item, whichField: itemrealfield, value: number): boolean;
+declare function BlzSetItemStringField(whichItem: item, whichField: itemstringfield, value: string): boolean;
+declare function BlzItemRemoveAbility(whichItem: item, abilCode: number): boolean;
+
 export class Item extends Widget {
 
   public readonly handle!: item;

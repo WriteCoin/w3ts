@@ -5,6 +5,25 @@ import { Point } from "./point";
 import { Rectangle } from "./rect";
 import { Unit } from "./unit";
 
+declare interface agent extends handle { __agent: never; }
+declare interface region extends agent { __region: never; }
+declare interface rect extends agent { __rect: never; }
+declare interface location extends agent { __location: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+
+declare function CreateRegion(): region;
+declare function RemoveRegion(whichRegion: region): void;
+declare function RegionAddRect(whichRegion: region, r: rect): void;
+declare function RegionClearRect(whichRegion: region, r: rect): void;
+declare function RegionAddCell(whichRegion: region, x: number, y: number): void;
+declare function RegionAddCellAtLoc(whichRegion: region, whichLocation: location): void;
+declare function RegionClearCell(whichRegion: region, x: number, y: number): void;
+declare function RegionClearCellAtLoc(whichRegion: region, whichLocation: location): void;
+declare function IsUnitInRegion(whichRegion: region, whichUnit: unit): boolean;
+declare function IsPointInRegion(whichRegion: region, x: number, y: number): boolean;
+declare function IsLocationInRegion(whichRegion: region, whichLocation: location): boolean;
+
 export class Region extends Handle<region> {
 
   constructor() {

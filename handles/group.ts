@@ -7,6 +7,48 @@ import { Rectangle } from "./rect";
 import { Unit } from "./unit";
 import { Widget } from "./widget";
 
+declare interface agent extends handle { __agent: never; }
+declare interface group extends agent { __group: never; }
+declare interface player extends agent { __player: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+declare interface rect extends agent { __rect: never; }
+declare interface boolexpr extends agent { __boolexpr: never; }
+declare interface location extends agent { __location: never; }
+
+declare function CreateGroup(): group;
+declare function DestroyGroup(whichGroup: group): void;
+declare function GroupAddUnit(whichGroup: group, whichUnit: unit): boolean;
+declare function GroupRemoveUnit(whichGroup: group, whichUnit: unit): boolean;
+declare function BlzGroupAddGroupFast(whichGroup: group, addGroup: group): number;
+declare function BlzGroupRemoveGroupFast(whichGroup: group, removeGroup: group): number;
+declare function GroupClear(whichGroup: group): void;
+declare function BlzGroupGetSize(whichGroup: group): number;
+declare function BlzGroupUnitAt(whichGroup: group, index: number): unit;
+declare function GroupEnumUnitsOfType(whichGroup: group, unitname: string, filter: boolexpr | null): void;
+declare function GroupEnumUnitsOfPlayer(whichGroup: group, whichPlayer: player, filter: boolexpr | null): void;
+declare function GroupEnumUnitsOfTypeCounted(whichGroup: group, unitname: string, filter: boolexpr | null, countLimit: number): void;
+declare function GroupEnumUnitsInRect(whichGroup: group, r: rect, filter: boolexpr | null): void;
+declare function GroupEnumUnitsInRectCounted(whichGroup: group, r: rect, filter: boolexpr | null, countLimit: number): void;
+declare function GroupEnumUnitsInRange(whichGroup: group, x: number, y: number, radius: number, filter: boolexpr | null): void;
+declare function GroupEnumUnitsInRangeOfLoc(whichGroup: group, whichLocation: location, radius: number, filter: boolexpr | null): void;
+declare function GroupEnumUnitsInRangeCounted(whichGroup: group, x: number, y: number, radius: number, filter: boolexpr | null, countLimit: number): void;
+declare function GroupEnumUnitsInRangeOfLocCounted(whichGroup: group, whichLocation: location, radius: number, filter: boolexpr | null, countLimit: number): void;
+declare function GroupEnumUnitsSelected(whichGroup: group, whichPlayer: player, filter: boolexpr | null): void;
+declare function GroupImmediateOrder(whichGroup: group, order: string): boolean;
+declare function GroupImmediateOrderById(whichGroup: group, order: number): boolean;
+declare function GroupPointOrder(whichGroup: group, order: string, x: number, y: number): boolean;
+declare function GroupPointOrderLoc(whichGroup: group, order: string, whichLocation: location): boolean;
+declare function GroupPointOrderById(whichGroup: group, order: number, x: number, y: number): boolean;
+declare function GroupPointOrderByIdLoc(whichGroup: group, order: number, whichLocation: location): boolean;
+declare function GroupTargetOrder(whichGroup: group, order: string, targetWidget: widget): boolean;
+declare function GroupTargetOrderById(whichGroup: group, order: number, targetWidget: widget): boolean;
+declare function ForGroup(whichGroup: group, callback: () => void): void;
+declare function FirstOfGroup(whichGroup: group): unit;
+declare function IsUnitInGroup(whichUnit: unit, whichGroup: group): boolean;
+declare function GetFilterUnit(): unit;
+declare function GetEnumUnit(): unit;
+
 export class Group extends Handle<group> {
 
   constructor() {

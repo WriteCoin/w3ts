@@ -2,6 +2,15 @@
 
 import { Handle } from "./handle";
 
+declare interface agent extends handle { __agent: never; }
+declare interface widget extends agent { __widget: never; }
+
+declare function GetWidgetLife(whichWidget: widget): number;
+declare function SetWidgetLife(whichWidget: widget, newLife: number): void;
+declare function GetWidgetX(whichWidget: widget): number;
+declare function GetWidgetY(whichWidget: widget): number;
+declare function GetTriggerWidget(): widget;
+
 export class Widget extends Handle<widget> {
 
   public get life() {

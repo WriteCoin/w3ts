@@ -7,6 +7,116 @@ import { MapPlayer } from "./player";
 import { Unit } from "./unit";
 import { Widget } from "./widget";
 
+declare interface agent extends handle { __agent: never; }
+declare interface trigger extends agent { __trigger: never; }
+declare interface triggercondition extends agent { __triggercondition: never; }
+declare interface triggeraction extends handle { __triggeraction: never; }
+declare interface eventid extends handle { __eventid: never; }
+declare interface boolexpr extends agent { __boolexpr: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+declare interface event extends agent { __event: never; }
+declare interface playerunitevent extends eventid { __playerunitevent: never; }
+declare interface region extends agent { __region: never; }
+declare interface rect extends agent { __rect: never; }
+declare interface dialog extends agent { __dialog: never; }
+declare interface player extends agent { __player: never; }
+declare interface timer extends agent { __timer: never; }
+declare interface limitop extends eventid { __limitop: never; }
+declare interface trackable extends agent { __trackable: never; }
+declare interface gamestate extends handle { __gamestate: never; }
+declare interface button extends agent { __button: never; }
+declare interface unitevent extends eventid { __unitevent: never; }
+declare interface gameevent extends eventid { __gameevent: never; }
+declare interface alliancetype extends handle { __alliancetype: never; }
+declare interface playerstate extends handle { __playerstate: never; }
+declare interface playerevent extends eventid { __playerevent: never; }
+declare interface oskeytype extends handle { __oskeytype: never; }
+declare interface unitstate extends handle { __unitstate: never; }
+declare interface frameeventtype extends handle { __frameeventtype: never; }
+declare interface framehandle extends handle { __framehandle: never; }
+
+declare function CreateTrigger(): trigger;
+declare function DestroyTrigger(whichTrigger: trigger): void;
+declare function ResetTrigger(whichTrigger: trigger): void;
+declare function EnableTrigger(whichTrigger: trigger): void;
+declare function DisableTrigger(whichTrigger: trigger): void;
+declare function IsTriggerEnabled(whichTrigger: trigger): boolean;
+declare function TriggerWaitOnSleeps(whichTrigger: trigger, flag: boolean): void;
+declare function IsTriggerWaitOnSleeps(whichTrigger: trigger): boolean;
+declare function GetTriggeringTrigger(): trigger;
+declare function GetTriggerEventId(): eventid;
+declare function GetTriggerEvalCount(whichTrigger: trigger): number;
+declare function GetTriggerExecCount(whichTrigger: trigger): number;
+declare function TriggerRegisterUnitInRange(whichTrigger: trigger, whichUnit: unit, range: number, filter: boolexpr | null): event;
+declare function TriggerAddCondition(whichTrigger: trigger, condition: boolexpr | null): triggercondition;
+declare function TriggerRemoveCondition(whichTrigger: trigger, whichCondition: triggercondition): void;
+declare function TriggerClearConditions(whichTrigger: trigger): void;
+declare function TriggerAddAction(whichTrigger: trigger, actionFunc: () => void): triggeraction;
+declare function TriggerRemoveAction(whichTrigger: trigger, whichAction: triggeraction): void;
+declare function TriggerClearActions(whichTrigger: trigger): void;
+declare function TriggerEvaluate(whichTrigger: trigger): boolean;
+declare function TriggerExecute(whichTrigger: trigger): void;
+declare function TriggerExecuteWait(whichTrigger: trigger): void;
+declare function TriggerRegisterTimerEventPeriodic(trig: trigger, timeout: number): event;
+declare function TriggerRegisterTimerEventSingle(trig: trigger, timeout: number): event;
+declare function TriggerRegisterTimerExpireEventBJ(trig: trigger, t: timer): event;
+declare function TriggerRegisterPlayerUnitEventSimple(trig: trigger, whichPlayer: player, whichEvent: playerunitevent): event;
+declare function TriggerRegisterAnyUnitEventBJ(trig: trigger, whichEvent: playerunitevent): void;
+declare function TriggerRegisterPlayerSelectionEventBJ(trig: trigger, whichPlayer: player, selected: boolean): event;
+declare function TriggerRegisterPlayerKeyEventBJ(trig: trigger, whichPlayer: player, keType: number, keKey: number): event;
+declare function TriggerRegisterPlayerMouseEventBJ(trig: trigger, whichPlayer: player, meType: number): event;
+declare function TriggerRegisterPlayerEventVictory(trig: trigger, whichPlayer: player): event;
+declare function TriggerRegisterPlayerEventDefeat(trig: trigger, whichPlayer: player): event;
+declare function TriggerRegisterPlayerEventLeave(trig: trigger, whichPlayer: player): event;
+declare function TriggerRegisterPlayerEventAllianceChanged(trig: trigger, whichPlayer: player): event;
+declare function TriggerRegisterPlayerEventEndCinematic(trig: trigger, whichPlayer: player): event;
+declare function TriggerRegisterGameStateEventTimeOfDay(trig: trigger, opcode: limitop, limitval: number): event;
+declare function TriggerRegisterEnterRegionSimple(trig: trigger, whichRegion: region): event;
+declare function TriggerRegisterLeaveRegionSimple(trig: trigger, whichRegion: region): event;
+declare function TriggerRegisterEnterRectSimple(trig: trigger, r: rect): event;
+declare function TriggerRegisterLeaveRectSimple(trig: trigger, r: rect): event;
+declare function TriggerRegisterDistanceBetweenUnits(trig: trigger, whichUnit: unit, condition: boolexpr | null, range: number): event;
+declare function TriggerRegisterUnitInRangeSimple(trig: trigger, range: number, whichUnit: unit): event;
+declare function TriggerRegisterUnitLifeEvent(trig: trigger, whichUnit: unit, opcode: limitop, limitval: number): event;
+declare function TriggerRegisterUnitManaEvent(trig: trigger, whichUnit: unit, opcode: limitop, limitval: number): event;
+declare function TriggerRegisterDialogEventBJ(trig: trigger, whichDialog: dialog): event;
+declare function TriggerRegisterShowSkillEventBJ(trig: trigger): event;
+declare function TriggerRegisterBuildSubmenuEventBJ(trig: trigger): event;
+declare function TriggerRegisterBuildCommandEventBJ(trig: trigger, unitId: number): event;
+declare function TriggerRegisterTrainCommandEventBJ(trig: trigger, unitId: number): event;
+declare function TriggerRegisterUpgradeCommandEventBJ(trig: trigger, techId: number): event;
+declare function TriggerRegisterCommonCommandEventBJ(trig: trigger, order: string): event;
+declare function TriggerRegisterGameLoadedEventBJ(trig: trigger): event;
+declare function TriggerRegisterGameSavedEventBJ(trig: trigger): event;
+declare function RegisterDestDeathInRegionEnum(): void;
+declare function TriggerRegisterDestDeathInRegionEvent(trig: trigger, r: rect): void;
+declare function TriggerRegisterTrackableHitEvent(whichTrigger: trigger, t: trackable): event;
+declare function TriggerRegisterTrackableTrackEvent(whichTrigger: trigger, t: trackable): event;
+declare function TriggerRegisterCommandEvent(whichTrigger: trigger, whichAbility: number, order: string): event;
+declare function TriggerRegisterUpgradeCommandEvent(whichTrigger: trigger, whichUpgrade: number): event;
+declare function TriggerRegisterDeathEvent(whichTrigger: trigger, whichWidget: widget): event;
+declare function TriggerRegisterVariableEvent(whichTrigger: trigger, varName: string, opcode: limitop, limitval: number): event;
+declare function TriggerRegisterTimerEvent(whichTrigger: trigger, timeout: number, periodic: boolean): event;
+declare function TriggerRegisterTimerExpireEvent(whichTrigger: trigger, t: timer): event;
+declare function TriggerRegisterGameStateEvent(whichTrigger: trigger, whichState: gamestate, opcode: limitop, limitval: number): event;
+declare function TriggerRegisterDialogEvent(whichTrigger: trigger, whichDialog: dialog): event;
+declare function TriggerRegisterDialogButtonEvent(whichTrigger: trigger, whichButton: button): event;
+declare function TriggerRegisterEnterRegion(whichTrigger: trigger, whichRegion: region, filter: boolexpr | null): event;
+declare function TriggerRegisterFilterUnitEvent(whichTrigger: trigger, whichUnit: unit, whichEvent: unitevent, filter: boolexpr | null): event;
+declare function TriggerRegisterGameEvent(whichTrigger: trigger, whichGameEvent: gameevent): event;
+declare function TriggerRegisterLeaveRegion(whichTrigger: trigger, whichRegion: region, filter: boolexpr | null): event;
+declare function TriggerRegisterPlayerAllianceChange(whichTrigger: trigger, whichPlayer: player, whichAlliance: alliancetype): event;
+declare function TriggerRegisterPlayerStateEvent(whichTrigger: trigger, whichPlayer: player, whichState: playerstate, opcode: limitop, limitval: number): event;
+declare function TriggerRegisterPlayerChatEvent(whichTrigger: trigger, whichPlayer: player, chatMessageToDetect: string, exactMatchOnly: boolean): event;
+declare function TriggerRegisterPlayerEvent(whichTrigger: trigger, whichPlayer: player, whichPlayerEvent: playerevent): event;
+declare function TriggerRegisterPlayerUnitEvent(whichTrigger: trigger, whichPlayer: player, whichPlayerUnitEvent: playerunitevent, filter: boolexpr | null): event;
+declare function BlzTriggerRegisterPlayerKeyEvent(whichTrigger: trigger, whichPlayer: player, key: oskeytype, metaKey: number, keyDown: boolean): event;
+declare function BlzTriggerRegisterPlayerSyncEvent(whichTrigger: trigger, whichPlayer: player, prefix: string, fromServer: boolean): event;
+declare function TriggerRegisterUnitEvent(whichTrigger: trigger, whichUnit: unit, whichEvent: unitevent): event;
+declare function TriggerRegisterUnitStateEvent(whichTrigger: trigger, whichUnit: unit, whichState: unitstate, opcode: limitop, limitval: number): event;
+declare function BlzTriggerRegisterFrameEvent(whichTrigger: trigger, frame: framehandle, eventId: frameeventtype): event;
+
 export class Trigger extends Handle<trigger> {
 
   constructor() {

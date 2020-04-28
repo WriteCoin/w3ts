@@ -2,6 +2,45 @@
 
 import { Handle } from "./handle";
 
+declare interface agent extends handle { __agent: never; }
+declare interface sound extends agent { __sound: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+
+declare function CreateSound(fileName: string, looping: boolean, is3D: boolean, stopwhenoutofrange: boolean, fadeInRate: number, fadeOutRate: number, eaxSetting: string): sound;
+declare function CreateSoundFilenameWithLabel(fileName: string, looping: boolean, is3D: boolean, stopwhenoutofrange: boolean, fadeInRate: number, fadeOutRate: number, SLKEntryName: string): sound;
+declare function CreateSoundFromLabel(soundLabel: string, looping: boolean, is3D: boolean, stopwhenoutofrange: boolean, fadeInRate: number, fadeOutRate: number): sound;
+declare function CreateMIDISound(soundLabel: string, fadeInRate: number, fadeOutRate: number): sound;
+declare function SetSoundParamsFromLabel(soundHandle: sound, soundLabel: string): void;
+declare function SetSoundDistanceCutoff(soundHandle: sound, cutoff: number): void;
+declare function SetSoundChannel(soundHandle: sound, channel: number): void;
+declare function SetSoundVolume(soundHandle: sound, volume: number): void;
+declare function SetSoundPitch(soundHandle: sound, pitch: number): void;
+declare function SetSoundPlayPosition(soundHandle: sound, millisecs: number): void;
+declare function SetSoundDistances(soundHandle: sound, minDist: number, maxDist: number): void;
+declare function SetSoundConeAngles(soundHandle: sound, inside: number, outside: number, outsideVolume: number): void;
+declare function SetSoundConeOrientation(soundHandle: sound, x: number, y: number, z: number): void;
+declare function SetSoundPosition(soundHandle: sound, x: number, y: number, z: number): void;
+declare function SetSoundVelocity(soundHandle: sound, x: number, y: number, z: number): void;
+declare function AttachSoundToUnit(soundHandle: sound, whichUnit: unit): void;
+declare function StartSound(soundHandle: sound): void;
+declare function StopSound(soundHandle: sound, killWhenDone: boolean, fadeOut: boolean): void;
+declare function KillSoundWhenDone(soundHandle: sound): void;
+declare function GetSoundIsPlaying(soundHandle: sound): boolean;
+declare function GetSoundIsLoading(soundHandle: sound): boolean;
+declare function RegisterStackedSound(soundHandle: sound, byPosition: boolean, rectwidth: number, rectheight: number): void;
+declare function UnregisterStackedSound(soundHandle: sound, byPosition: boolean, rectwidth: number, rectheight: number): void;
+declare function SetSoundFacialAnimationLabel(soundHandle: sound, animationLabel: string): boolean;
+declare function SetSoundFacialAnimationGroupLabel(soundHandle: sound, groupLabel: string): boolean;
+declare function SetSoundFacialAnimationSetFilepath(soundHandle: sound, animationSetFilepath: string): boolean;
+declare function SetDialogueSpeakerNameKey(soundHandle: sound, speakerName: string): boolean;
+declare function GetDialogueSpeakerNameKey(soundHandle: sound): string;
+declare function SetDialogueTextKey(soundHandle: sound, dialogueText: string): boolean;
+declare function GetDialogueTextKey(soundHandle: sound): string;
+declare function SetSoundDuration(soundHandle: sound, duration: number): void;
+declare function GetSoundDuration(soundHandle: sound): number;
+declare function GetSoundFileDuration(musicFileName: string): number;
+
 export class Sound extends Handle<sound> {
 
   constructor(fileName: string, looping: boolean, is3D: boolean, stopWhenOutOfRange: boolean, fadeInRate: number, fadeOutRate: number, eaxSetting: string) {

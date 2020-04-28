@@ -3,6 +3,39 @@
 import { Handle } from "./handle";
 import { Widget } from "./widget";
 
+declare interface agent extends handle { __agent: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface destructable extends widget { __destructable: never; }
+declare interface rect extends agent { __rect: never; }
+declare interface boolexpr extends agent { __boolexpr: never; }
+
+declare function CreateDestructable(objectid: number, x: number, y: number, face: number, scale: number, variation: number): destructable;
+declare function CreateDestructableZ(objectid: number, x: number, y: number, z: number, face: number, scale: number, variation: number): destructable;
+declare function CreateDeadDestructable(objectid: number, x: number, y: number, face: number, scale: number, variation: number): destructable;
+declare function CreateDeadDestructableZ(objectid: number, x: number, y: number, z: number, face: number, scale: number, variation: number): destructable;
+declare function RemoveDestructable(d: destructable): void;
+declare function KillDestructable(d: destructable): void;
+declare function SetDestructableInvulnerable(d: destructable, flag: boolean): void;
+declare function IsDestructableInvulnerable(d: destructable): boolean;
+declare function EnumDestructablesInRect(r: rect, filter: boolexpr | null, actionFunc: () => void): void;
+declare function GetDestructableTypeId(d: destructable): number;
+declare function GetDestructableX(d: destructable): number;
+declare function GetDestructableY(d: destructable): number;
+declare function SetDestructableLife(d: destructable, life: number): void;
+declare function GetDestructableLife(d: destructable): number;
+declare function SetDestructableMaxLife(d: destructable, max: number): void;
+declare function GetDestructableMaxLife(d: destructable): number;
+declare function DestructableRestoreLife(d: destructable, life: number, birth: boolean): void;
+declare function QueueDestructableAnimation(d: destructable, whichAnimation: string): void;
+declare function SetDestructableAnimation(d: destructable, whichAnimation: string): void;
+declare function SetDestructableAnimationSpeed(d: destructable, speedFactor: number): void;
+declare function ShowDestructable(d: destructable, flag: boolean): void;
+declare function GetDestructableOccluderHeight(d: destructable): number;
+declare function SetDestructableOccluderHeight(d: destructable, height: number): void;
+declare function GetDestructableName(d: destructable): string;
+declare function GetTriggerDestructable(): destructable;
+
+
 export class Destructable extends Widget {
 
   public readonly handle!: destructable;

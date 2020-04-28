@@ -8,6 +8,15 @@ import { BinaryReader } from "./binaryreader";
 import { BinaryWriter } from "./binarywriter";
 import { getElapsedTime } from "./gametime";
 
+declare interface mapcontrol extends handle { __mapcontrol: never; }
+declare interface playerslotstate extends handle { __playerslotstate: never; }
+declare function BlzSendSyncData(prefix: string, data: string): boolean;
+declare const bj_MAX_PLAYER_SLOTS: number;
+declare const MAP_CONTROL_USER: mapcontrol;
+declare const PLAYER_SLOT_STATE_PLAYING: playerslotstate;
+declare function BlzGetTriggerSyncPrefix(): string;
+declare function BlzGetTriggerSyncData(): string;
+
 const SYNC_PREFIX = "T";
 const SYNC_PREFIX_CHUNK = "S";
 const SYNC_MAX_CHUNK_SIZE = 244;

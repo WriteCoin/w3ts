@@ -3,6 +3,28 @@
 import { Handle } from "./handle";
 import { Point } from "./point";
 
+declare interface agent extends handle { __agent: never; }
+declare interface rect extends agent { __rect: never; }
+declare interface location extends agent { __location: never; }
+declare interface boolexpr extends agent { __boolexpr: never; }
+
+declare function Rect(minx: number, miny: number, maxx: number, maxy: number): rect;
+declare function RectFromLoc(min: location, max: location): rect;
+declare function RemoveRect(whichRect: rect): void;
+declare function SetRect(whichRect: rect, minx: number, miny: number, maxx: number, maxy: number): void;
+declare function SetRectFromLoc(whichRect: rect, min: location, max: location): void;
+declare function MoveRectTo(whichRect: rect, newCenterX: number, newCenterY: number): void;
+declare function MoveRectToLoc(whichRect: rect, newCenterLoc: location): void;
+declare function GetRectCenterX(whichRect: rect): number;
+declare function GetRectCenterY(whichRect: rect): number;
+declare function GetRectMinX(whichRect: rect): number;
+declare function GetRectMinY(whichRect: rect): number;
+declare function GetRectMaxX(whichRect: rect): number;
+declare function GetRectMaxY(whichRect: rect): number;
+declare function EnumDestructablesInRect(r: rect, filter: boolexpr | null, actionFunc: () => void): void;
+declare function EnumItemsInRect(r: rect, filter: boolexpr | null, actionFunc: () => void): void;
+declare function GetWorldBounds(): rect;
+
 export class Rectangle extends Handle<rect> {
 
   constructor(minX: number, minY: number, maxX: number, maxY: number) {

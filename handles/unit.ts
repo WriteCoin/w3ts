@@ -10,6 +10,301 @@ import { Point } from "./point";
 import { Sound } from "./sound";
 import { Widget } from "./widget";
 
+declare interface agent extends handle { __agent: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+declare interface player extends agent { __player: never; }
+declare interface location extends agent { __location: never; }
+declare interface unitstate extends handle { __unitstate: never; }
+declare interface playercolor extends handle { __playercolor: never; }
+declare interface raritycontrol extends handle { __raritycontrol: never; }
+declare interface item extends widget { __item: never; }
+declare interface race extends handle { __race: never; }
+declare interface destructable extends widget { __destructable: never; }
+declare interface force extends agent { __force: never; }
+declare interface group extends agent { __group: never; }
+declare interface unittype extends handle { __unittype: never; }
+declare interface attacktype extends handle { __attacktype: never; }
+declare interface damagetype extends handle { __damagetype: never; }
+declare interface weapontype extends handle { __weapontype: never; }
+declare interface unitrealfield extends handle { __unitrealfield: never; }
+declare interface sound extends agent { __sound: never; }
+declare interface ability extends agent { __ability: never; }
+declare interface unitintegerfield extends handle { __unitintegerfield: never; }
+declare interface unitrealfield extends handle { __unitrealfield: never; }
+declare interface unitbooleanfield extends handle { __unitbooleanfield: never; }
+declare interface unitstringfield extends handle { __unitstringfield: never; }
+declare interface unitweaponintegerfield extends handle { __unitweaponintegerfield: never; }
+declare interface unitweaponrealfield extends handle { __unitweaponrealfield: never; }
+declare interface unitweaponbooleanfield extends handle { __unitweaponbooleanfield: never; }
+declare interface unitweaponstringfield extends handle { __unitweaponstringfield: never; }
+
+declare function CreateUnit(id: player, unitid: number, x: number, y: number, face: number): unit;
+declare function CreateUnitByName(whichPlayer: player, unitname: string, x: number, y: number, face: number): unit;
+declare function CreateUnitAtLoc(id: player, unitid: number, whichLocation: location, face: number): unit;
+declare function CreateUnitAtLocByName(id: player, unitname: string, whichLocation: location, face: number): unit;
+declare function CreateCorpse(whichPlayer: player, unitid: number, x: number, y: number, face: number): unit;
+declare function KillUnit(whichUnit: unit): void;
+declare function RemoveUnit(whichUnit: unit): void;
+declare function ShowUnit(whichUnit: unit, show: boolean): void;
+declare function SetUnitState(whichUnit: unit, whichUnitState: unitstate, newVal: number): void;
+declare function SetUnitX(whichUnit: unit, newX: number): void;
+declare function SetUnitY(whichUnit: unit, newY: number): void;
+declare function SetUnitPosition(whichUnit: unit, newX: number, newY: number): void;
+declare function SetUnitPositionLoc(whichUnit: unit, whichLocation: location): void;
+declare function SetUnitFacing(whichUnit: unit, facingAngle: number): void;
+declare function SetUnitFacingTimed(whichUnit: unit, facingAngle: number, duration: number): void;
+declare function SetUnitMoveSpeed(whichUnit: unit, newSpeed: number): void;
+declare function SetUnitFlyHeight(whichUnit: unit, newHeight: number, rate: number): void;
+declare function SetUnitTurnSpeed(whichUnit: unit, newTurnSpeed: number): void;
+declare function SetUnitPropWindow(whichUnit: unit, newPropWindowAngle: number): void;
+declare function SetUnitAcquireRange(whichUnit: unit, newAcquireRange: number): void;
+declare function SetUnitCreepGuard(whichUnit: unit, creepGuard: boolean): void;
+declare function GetUnitAcquireRange(whichUnit: unit): number;
+declare function GetUnitTurnSpeed(whichUnit: unit): number;
+declare function GetUnitPropWindow(whichUnit: unit): number;
+declare function GetUnitFlyHeight(whichUnit: unit): number;
+declare function GetUnitDefaultAcquireRange(whichUnit: unit): number;
+declare function GetUnitDefaultTurnSpeed(whichUnit: unit): number;
+declare function GetUnitDefaultPropWindow(whichUnit: unit): number;
+declare function GetUnitDefaultFlyHeight(whichUnit: unit): number;
+declare function SetUnitOwner(whichUnit: unit, whichPlayer: player, changeColor: boolean): void;
+declare function SetUnitColor(whichUnit: unit, whichColor: playercolor): void;
+declare function SetUnitScale(whichUnit: unit, scaleX: number, scaleY: number, scaleZ: number): void;
+declare function SetUnitTimeScale(whichUnit: unit, timeScale: number): void;
+declare function SetUnitBlendTime(whichUnit: unit, blendTime: number): void;
+declare function SetUnitVertexColor(whichUnit: unit, red: number, green: number, blue: number, alpha: number): void;
+declare function QueueUnitAnimation(whichUnit: unit, whichAnimation: string): void;
+declare function SetUnitAnimation(whichUnit: unit, whichAnimation: string): void;
+declare function SetUnitAnimationByIndex(whichUnit: unit, whichAnimation: number): void;
+declare function SetUnitAnimationWithRarity(whichUnit: unit, whichAnimation: string, rarity: raritycontrol): void;
+declare function AddUnitAnimationProperties(whichUnit: unit, animProperties: string, add: boolean): void;
+declare function SetUnitLookAt(whichUnit: unit, whichBone: string, lookAtTarget: unit, offsetX: number, offsetY: number, offsetZ: number): void;
+declare function ResetUnitLookAt(whichUnit: unit): void;
+declare function SetUnitRescuable(whichUnit: unit, byWhichPlayer: player, flag: boolean): void;
+declare function SetUnitRescueRange(whichUnit: unit, range: number): void;
+declare function SetHeroStr(whichHero: unit, newStr: number, permanent: boolean): void;
+declare function SetHeroAgi(whichHero: unit, newAgi: number, permanent: boolean): void;
+declare function SetHeroInt(whichHero: unit, newInt: number, permanent: boolean): void;
+declare function GetHeroStr(whichHero: unit, includeBonuses: boolean): number;
+declare function GetHeroAgi(whichHero: unit, includeBonuses: boolean): number;
+declare function GetHeroInt(whichHero: unit, includeBonuses: boolean): number;
+declare function UnitStripHeroLevel(whichHero: unit, howManyLevels: number): boolean;
+declare function GetHeroXP(whichHero: unit): number;
+declare function SetHeroXP(whichHero: unit, newXpVal: number, showEyeCandy: boolean): void;
+declare function GetHeroSkillPoints(whichHero: unit): number;
+declare function UnitModifySkillPoints(whichHero: unit, skillPointDelta: number): boolean;
+declare function AddHeroXP(whichHero: unit, xpToAdd: number, showEyeCandy: boolean): void;
+declare function SetHeroLevel(whichHero: unit, level: number, showEyeCandy: boolean): void;
+declare function GetHeroLevel(whichHero: unit): number;
+declare function GetUnitLevel(whichUnit: unit): number;
+declare function GetHeroProperName(whichHero: unit): string;
+declare function SuspendHeroXP(whichHero: unit, flag: boolean): void;
+declare function IsSuspendedXP(whichHero: unit): boolean;
+declare function SelectHeroSkill(whichHero: unit, abilcode: number): void;
+declare function GetUnitAbilityLevel(whichUnit: unit, abilcode: number): number;
+declare function DecUnitAbilityLevel(whichUnit: unit, abilcode: number): number;
+declare function IncUnitAbilityLevel(whichUnit: unit, abilcode: number): number;
+declare function SetUnitAbilityLevel(whichUnit: unit, abilcode: number, level: number): number;
+declare function ReviveHero(whichHero: unit, x: number, y: number, doEyecandy: boolean): boolean;
+declare function ReviveHeroLoc(whichHero: unit, loc: location, doEyecandy: boolean): boolean;
+declare function SetUnitExploded(whichUnit: unit, exploded: boolean): void;
+declare function SetUnitInvulnerable(whichUnit: unit, flag: boolean): void;
+declare function PauseUnit(whichUnit: unit, flag: boolean): void;
+declare function IsUnitPaused(whichHero: unit): boolean;
+declare function SetUnitPathing(whichUnit: unit, flag: boolean): void;
+declare function ClearSelection(): void;
+declare function SelectUnit(whichUnit: unit, flag: boolean): void;
+declare function GetUnitPointValue(whichUnit: unit): number;
+declare function GetUnitPointValueByType(unitType: number): number;
+declare function UnitAddItem(whichUnit: unit, whichItem: item): boolean;
+declare function UnitAddItemById(whichUnit: unit, itemId: number): item;
+declare function UnitAddItemToSlotById(whichUnit: unit, itemId: number, itemSlot: number): boolean;
+declare function UnitRemoveItem(whichUnit: unit, whichItem: item): void;
+declare function UnitRemoveItemFromSlot(whichUnit: unit, itemSlot: number): item;
+declare function UnitHasItem(whichUnit: unit, whichItem: item): boolean;
+declare function UnitItemInSlot(whichUnit: unit, itemSlot: number): item;
+declare function UnitInventorySize(whichUnit: unit): number;
+declare function UnitDropItemPoint(whichUnit: unit, whichItem: item, x: number, y: number): boolean;
+declare function UnitDropItemSlot(whichUnit: unit, whichItem: item, slot: number): boolean;
+declare function UnitDropItemTarget(whichUnit: unit, whichItem: item, target: widget): boolean;
+declare function UnitUseItem(whichUnit: unit, whichItem: item): boolean;
+declare function UnitUseItemPoint(whichUnit: unit, whichItem: item, x: number, y: number): boolean;
+declare function UnitUseItemTarget(whichUnit: unit, whichItem: item, target: widget): boolean;
+declare function GetUnitX(whichUnit: unit): number;
+declare function GetUnitY(whichUnit: unit): number;
+declare function GetUnitLoc(whichUnit: unit): location;
+declare function GetUnitFacing(whichUnit: unit): number;
+declare function GetUnitMoveSpeed(whichUnit: unit): number;
+declare function GetUnitDefaultMoveSpeed(whichUnit: unit): number;
+declare function GetUnitState(whichUnit: unit, whichUnitState: unitstate): number;
+declare function GetOwningPlayer(whichUnit: unit): player;
+declare function GetUnitTypeId(whichUnit: unit): number;
+declare function GetUnitRace(whichUnit: unit): race;
+declare function GetUnitName(whichUnit: unit): string;
+declare function GetUnitFoodUsed(whichUnit: unit): number;
+declare function GetUnitFoodMade(whichUnit: unit): number;
+declare function BlzCreateUnitWithSkin(id: player, unitid: number, x: number, y: number, face: number, skinId: number): unit;
+declare function Player(number: number): player;
+declare function BlzGetUnitArmor(whichUnit: unit): number;
+declare function BlzSetUnitArmor(whichUnit: unit, armorAmount: number): void;
+declare function BlzUnitHideAbility(whichUnit: unit, abilId: number, flag: boolean): void;
+declare function BlzUnitDisableAbility(whichUnit: unit, abilId: number, flag: boolean, hideUI: boolean): void;
+declare function BlzUnitCancelTimedLife(whichUnit: unit): void;
+declare function BlzIsUnitSelectable(whichUnit: unit): boolean;
+declare function BlzIsUnitInvulnerable(whichUnit: unit): boolean;
+declare function BlzUnitInterruptAttack(whichUnit: unit): void;
+declare function BlzGetUnitCollisionSize(whichUnit: unit): number;
+declare function SetUnitUseFood(whichUnit: unit, useFood: boolean): void;
+declare function GetUnitRallyPoint(whichUnit: unit): location;
+declare function GetUnitRallyUnit(whichUnit: unit): unit;
+declare function GetUnitRallyDestructable(whichUnit: unit): destructable;
+declare function IsUnitInGroup(whichUnit: unit, whichGroup: group): boolean;
+declare function IsUnitInForce(whichUnit: unit, whichForce: force): boolean;
+declare function IsUnitOwnedByPlayer(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitAlly(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitEnemy(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitVisible(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitDetected(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitInvisible(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitFogged(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitMasked(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitSelected(whichUnit: unit, whichPlayer: player): boolean;
+declare function IsUnitRace(whichUnit: unit, whichRace: race): boolean;
+declare function IsUnitType(whichUnit: unit, whichUnitType: unittype): boolean;
+declare function IsUnit(whichUnit: unit, whichSpecifiedUnit: unit): boolean;
+declare function IsUnitInRange(whichUnit: unit, otherUnit: unit, distance: number): boolean;
+declare function IsUnitInRangeXY(whichUnit: unit, x: number, y: number, distance: number): boolean;
+declare function IsUnitInRangeLoc(whichUnit: unit, whichLocation: location, distance: number): boolean;
+declare function IsUnitHidden(whichUnit: unit): boolean;
+declare function IsUnitIllusion(whichUnit: unit): boolean;
+declare function IsUnitInTransport(whichUnit: unit, whichTransport: unit): boolean;
+declare function IsUnitLoaded(whichUnit: unit): boolean;
+declare function UnitShareVision(whichUnit: unit, whichPlayer: player, share: boolean): void;
+declare function UnitSuspendDecay(whichUnit: unit, suspend: boolean): void;
+declare function UnitAddType(whichUnit: unit, whichUnitType: unittype): boolean;
+declare function UnitRemoveType(whichUnit: unit, whichUnitType: unittype): boolean;
+declare function UnitAddAbility(whichUnit: unit, abilityId: number): boolean;
+declare function UnitRemoveAbility(whichUnit: unit, abilityId: number): boolean;
+declare function UnitMakeAbilityPermanent(whichUnit: unit, permanent: boolean, abilityId: number): boolean;
+declare function UnitRemoveBuffs(whichUnit: unit, removePositive: boolean, removeNegative: boolean): void;
+declare function UnitRemoveBuffsEx(whichUnit: unit, removePositive: boolean, removeNegative: boolean, magic: boolean, physical: boolean, timedLife: boolean, aura: boolean, autoDispel: boolean): void;
+declare function UnitHasBuffsEx(whichUnit: unit, removePositive: boolean, removeNegative: boolean, magic: boolean, physical: boolean, timedLife: boolean, aura: boolean, autoDispel: boolean): boolean;
+declare function UnitCountBuffsEx(whichUnit: unit, removePositive: boolean, removeNegative: boolean, magic: boolean, physical: boolean, timedLife: boolean, aura: boolean, autoDispel: boolean): number;
+declare function UnitAddSleep(whichUnit: unit, add: boolean): void;
+declare function UnitCanSleep(whichUnit: unit): boolean;
+declare function UnitAddSleepPerm(whichUnit: unit, add: boolean): void;
+declare function UnitCanSleepPerm(whichUnit: unit): boolean;
+declare function UnitIsSleeping(whichUnit: unit): boolean;
+declare function UnitWakeUp(whichUnit: unit): void;
+declare function UnitApplyTimedLife(whichUnit: unit, buffId: number, duration: number): void;
+declare function UnitIgnoreAlarm(whichUnit: unit, flag: boolean): boolean;
+declare function UnitIgnoreAlarmToggled(whichUnit: unit): boolean;
+declare function UnitResetCooldown(whichUnit: unit): void;
+declare function UnitSetConstructionProgress(whichUnit: unit, constructionPercentage: number): void;
+declare function UnitSetUpgradeProgress(whichUnit: unit, upgradePercentage: number): void;
+declare function UnitPauseTimedLife(whichUnit: unit, flag: boolean): void;
+declare function UnitSetUsesAltIcon(whichUnit: unit, flag: boolean): void;
+declare function UnitDamagePoint(whichUnit: unit, delay: number, radius: number, x: number, y: number, amount: number, attack: boolean, ranged: boolean, attackType: attacktype, damageType: damagetype, weaponType: weapontype): boolean;
+declare function UnitDamageTarget(whichUnit: unit, target: widget, amount: number, attack: boolean, ranged: boolean, attackType: attacktype, damageType: damagetype, weaponType: weapontype): boolean;
+declare function IssueImmediateOrder(whichUnit: unit, order: string): boolean;
+declare function IssueImmediateOrderById(whichUnit: unit, order: number): boolean;
+declare function IssuePointOrder(whichUnit: unit, order: string, x: number, y: number): boolean;
+declare function IssuePointOrderLoc(whichUnit: unit, order: string, whichLocation: location): boolean;
+declare function IssuePointOrderById(whichUnit: unit, order: number, x: number, y: number): boolean;
+declare function IssuePointOrderByIdLoc(whichUnit: unit, order: number, whichLocation: location): boolean;
+declare function IssueTargetOrder(whichUnit: unit, order: string, targetWidget: widget): boolean;
+declare function IssueTargetOrderById(whichUnit: unit, order: number, targetWidget: widget): boolean;
+declare function IssueInstantPointOrder(whichUnit: unit, order: string, x: number, y: number, instantTargetWidget: widget): boolean;
+declare function IssueInstantPointOrderById(whichUnit: unit, order: number, x: number, y: number, instantTargetWidget: widget): boolean;
+declare function IssueInstantTargetOrder(whichUnit: unit, order: string, targetWidget: widget, instantTargetWidget: widget): boolean;
+declare function IssueInstantTargetOrderById(whichUnit: unit, order: number, targetWidget: widget, instantTargetWidget: widget): boolean;
+declare function IssueBuildOrder(whichPeon: unit, unitToBuild: string, x: number, y: number): boolean;
+declare function IssueBuildOrderById(whichPeon: unit, unitId: number, x: number, y: number): boolean;
+declare function GetUnitCurrentOrder(whichUnit: unit): number;
+declare function SetResourceAmount(whichUnit: unit, amount: number): void;
+declare function AddResourceAmount(whichUnit: unit, amount: number): void;
+declare function GetResourceAmount(whichUnit: unit): number;
+declare function WaygateGetDestinationX(waygate: unit): number;
+declare function WaygateGetDestinationY(waygate: unit): number;
+declare function WaygateSetDestination(waygate: unit, x: number, y: number): void;
+declare function WaygateActivate(waygate: unit, activate: boolean): void;
+declare function WaygateIsActive(waygate: unit): boolean;
+declare function BlzSetUnitAbilityCooldown(whichUnit: unit, abilId: number, level: number, cooldown: number): void;
+declare function BlzGetUnitAbilityCooldown(whichUnit: unit, abilId: number, level: number): number;
+declare function BlzGetUnitAbilityCooldownRemaining(whichUnit: unit, abilId: number): number;
+declare function BlzEndUnitAbilityCooldown(whichUnit: unit, abilCode: number): void;
+declare function BlzStartUnitAbilityCooldown(whichUnit: unit, abilCode: number, cooldown: number): void;
+declare function BlzGetUnitAbilityManaCost(whichUnit: unit, abilId: number, level: number): number;
+declare function BlzSetUnitAbilityManaCost(whichUnit: unit, abilId: number, level: number, manaCost: number): void;
+declare function BlzGetLocalUnitZ(whichUnit: unit): number;
+declare const UNIT_STATE_MANA: unitstate;
+declare function BlzGetUnitMaxHP(whichUnit: unit): number;
+declare function BlzSetUnitMaxHP(whichUnit: unit, hp: number): void;
+declare function BlzGetUnitMaxMana(whichUnit: unit): number;
+declare function BlzSetUnitMaxMana(whichUnit: unit, mana: number): void;
+declare function BlzSetUnitName(whichUnit: unit, name: string): void;
+declare function BlzSetHeroProperName(whichUnit: unit, heroProperName: string): void;
+declare function BlzGetUnitBaseDamage(whichUnit: unit, weaponIndex: number): number;
+declare function BlzSetUnitBaseDamage(whichUnit: unit, baseDamage: number, weaponIndex: number): void;
+declare function BlzGetUnitDiceNumber(whichUnit: unit, weaponIndex: number): number;
+declare function BlzSetUnitDiceNumber(whichUnit: unit, diceNumber: number, weaponIndex: number): void;
+declare function BlzGetUnitDiceSides(whichUnit: unit, weaponIndex: number): number;
+declare function BlzSetUnitDiceSides(whichUnit: unit, diceSides: number, weaponIndex: number): void;
+declare function BlzGetUnitAttackCooldown(whichUnit: unit, weaponIndex: number): number;
+declare function BlzSetUnitAttackCooldown(whichUnit: unit, cooldown: number, weaponIndex: number): void;
+declare const UNIT_RF_SELECTION_SCALE: unitrealfield;
+declare function BlzGetUnitSkin(whichUnit: unit): number;
+declare function BlzSetUnitSkin(whichUnit: unit, skinId: number): void;
+declare function SetItemTypeSlots(whichUnit: unit, slots: number): void;
+declare function SetUnitTypeSlots(whichUnit: unit, slots: number): void;
+declare function GetUnitUserData(whichUnit: unit): number;
+declare function SetUnitUserData(whichUnit: unit, data: number): void;
+declare function BlzGetUnitZ(whichUnit: unit): number;
+declare function UnitAddIndicator(whichUnit: unit, red: number, green: number, blue: number, alpha: number): void;
+declare function AddItemToStock(whichUnit: unit, itemId: number, currentStock: number, stockMax: number): void;
+declare function AddUnitToStock(whichUnit: unit, unitId: number, currentStock: number, stockMax: number): void;
+declare function AttachSoundToUnit(soundHandle: sound, whichUnit: unit): void;
+declare function BlzSetUnitAbilityCooldown(whichUnit: unit, abilId: number, level: number, cooldown: number): void;
+declare function BlzGetUnitAbilityCooldown(whichUnit: unit, abilId: number, level: number): number;
+declare function BlzGetUnitAbilityCooldownRemaining(whichUnit: unit, abilId: number): number;
+declare function BlzEndUnitAbilityCooldown(whichUnit: unit, abilCode: number): void;
+declare function BlzStartUnitAbilityCooldown(whichUnit: unit, abilCode: number, cooldown: number): void;
+declare function BlzGetUnitAbilityManaCost(whichUnit: unit, abilId: number, level: number): number;
+declare function BlzSetUnitAbilityManaCost(whichUnit: unit, abilId: number, level: number, manaCost: number): void;
+declare function BlzGetLocalUnitZ(whichUnit: unit): number;
+declare function BlzGetUnitAbility(whichUnit: unit, abilId: number): ability;
+declare function BlzGetUnitAbilityByIndex(whichUnit: unit, index: number): ability;
+declare function BlzGetUnitBooleanField(whichUnit: unit, whichField: unitbooleanfield): boolean;
+declare function BlzGetUnitIntegerField(whichUnit: unit, whichField: unitintegerfield): number;
+declare function BlzGetUnitRealField(whichUnit: unit, whichField: unitrealfield): number;
+declare function BlzGetUnitStringField(whichUnit: unit, whichField: unitstringfield): string;
+declare function BlzSetUnitBooleanField(whichUnit: unit, whichField: unitbooleanfield, value: boolean): boolean;
+declare function BlzSetUnitIntegerField(whichUnit: unit, whichField: unitintegerfield, value: number): boolean;
+declare function BlzSetUnitRealField(whichUnit: unit, whichField: unitrealfield, value: number): boolean;
+declare function BlzSetUnitStringField(whichUnit: unit, whichField: unitstringfield, value: string): boolean;
+declare function BlzGetUnitWeaponBooleanField(whichUnit: unit, whichField: unitweaponbooleanfield, index: number): boolean;
+declare function BlzGetUnitWeaponIntegerField(whichUnit: unit, whichField: unitweaponintegerfield, index: number): number;
+declare function BlzGetUnitWeaponRealField(whichUnit: unit, whichField: unitweaponrealfield, index: number): number;
+declare function BlzGetUnitWeaponStringField(whichUnit: unit, whichField: unitweaponstringfield, index: number): string;
+declare function BlzSetUnitWeaponBooleanField(whichUnit: unit, whichField: unitweaponbooleanfield, index: number, value: boolean): boolean;
+declare function BlzSetUnitWeaponIntegerField(whichUnit: unit, whichField: unitweaponintegerfield, index: number, value: number): boolean;
+declare function BlzSetUnitWeaponRealField(whichUnit: unit, whichField: unitweaponrealfield, index: number, value: number): boolean;
+declare function BlzSetUnitWeaponStringField(whichUnit: unit, whichField: unitweaponstringfield, index: number, value: string): boolean;
+declare function UnitAlive(id: unit): boolean;
+declare function IsHeroUnitId(unitId: number): boolean;
+declare function BlzPauseUnitEx(whichUnit: unit, flag: boolean): void;
+declare function BlzSetUnitFacingEx(whichUnit: unit, facingAngle: number): void;
+declare function RemoveGuardPosition(hUnit: unit): void;
+declare function RecycleGuardPosition(hUnit: unit): void;
+declare function RemoveItemFromStock(whichUnit: unit, itemId: number): void;
+declare function RemoveUnitFromStock(whichUnit: unit, unitId: number): void;
+declare function BlzShowUnitTeamGlow(whichUnit: unit, show: boolean): void;
+declare function GetFoodUsed(unitId: number): number;
+declare function GetFoodMade(unitId: number): number;
+declare function GetTriggerUnit(): unit;
+declare function IsUnitIdType(unitId: number, whichUnitType: unittype): boolean;
+
 export class Unit extends Widget {
 
   public readonly handle!: unit;

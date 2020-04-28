@@ -3,6 +3,24 @@
 import { Handle } from "./handle";
 import { MapPlayer } from "./player";
 
+declare interface agent extends handle { __agent: never; }
+declare interface force extends agent { __force: never; }
+declare interface player extends agent { __player: never; }
+declare interface boolexpr extends agent { __boolexpr: never; }
+
+declare function CreateForce(): force;
+declare function DestroyForce(whichForce: force): void;
+declare function ForceAddPlayer(whichForce: force, whichPlayer: player): void;
+declare function ForceRemovePlayer(whichForce: force, whichPlayer: player): void;
+declare function BlzForceHasPlayer(whichForce: force, whichPlayer: player): boolean;
+declare function ForceClear(whichForce: force): void;
+declare function ForceEnumPlayers(whichForce: force, filter: boolexpr | null): void;
+declare function ForceEnumPlayersCounted(whichForce: force, filter: boolexpr | null, countLimit: number): void;
+declare function ForceEnumAllies(whichForce: force, whichPlayer: player, filter: boolexpr | null): void;
+declare function ForceEnumEnemies(whichForce: force, whichPlayer: player, filter: boolexpr | null): void;
+declare function ForForce(whichForce: force, callback: () => void): void;
+declare function IsPlayerInForce(whichPlayer: player, whichForce: force): boolean;
+
 export class Force extends Handle<force> {
 
   constructor() {

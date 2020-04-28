@@ -8,6 +8,12 @@ import { BinaryReader } from "./binaryreader";
 import { BinaryWriter } from "./binarywriter";
 import { SyncRequest } from "./sync";
 
+declare interface mapcontrol extends handle { __mapcontrol: never; }
+declare interface playerslotstate extends handle { __playerslotstate: never; }
+declare const bj_MAX_PLAYERS: number;
+declare const PLAYER_SLOT_STATE_PLAYING: playerslotstate;
+declare const MAP_CONTROL_USER: mapcontrol;
+
 const lobbyTimes: number[] = [];
 const checkTimer = new Timer();
 const hostCallbacks: Array<() => void> = [];

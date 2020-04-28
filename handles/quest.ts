@@ -2,6 +2,32 @@
 
 import { Handle } from "./handle";
 
+declare interface agent extends handle { __agent: never; }
+declare interface quest extends agent { __quest: never; }
+declare interface questitem extends agent { __questitem: never; }
+
+declare function CreateQuest(): quest;
+declare function DestroyQuest(whichQuest: quest): void;
+declare function QuestSetTitle(whichQuest: quest, title: string): void;
+declare function QuestSetDescription(whichQuest: quest, description: string): void;
+declare function QuestSetIconPath(whichQuest: quest, iconPath: string): void;
+declare function QuestSetRequired(whichQuest: quest, required: boolean): void;
+declare function QuestSetCompleted(whichQuest: quest, completed: boolean): void;
+declare function QuestSetDiscovered(whichQuest: quest, discovered: boolean): void;
+declare function QuestSetFailed(whichQuest: quest, failed: boolean): void;
+declare function QuestSetEnabled(whichQuest: quest, enabled: boolean): void;
+declare function IsQuestRequired(whichQuest: quest): boolean;
+declare function IsQuestCompleted(whichQuest: quest): boolean;
+declare function IsQuestDiscovered(whichQuest: quest): boolean;
+declare function IsQuestFailed(whichQuest: quest): boolean;
+declare function IsQuestEnabled(whichQuest: quest): boolean;
+declare function QuestCreateItem(whichQuest: quest): questitem;
+declare function QuestItemSetDescription(whichQuestItem: questitem, description: string): void;
+declare function QuestItemSetCompleted(whichQuestItem: questitem, completed: boolean): void;
+declare function IsQuestItemCompleted(whichQuestItem: questitem): boolean;
+declare function FlashQuestDialogButton(): void;
+declare function ForceQuestDialogUpdate(): void;
+
 export class QuestItem extends Handle<questitem> {
 
   constructor(whichQuest: Quest) {

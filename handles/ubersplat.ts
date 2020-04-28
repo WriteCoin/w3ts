@@ -2,6 +2,16 @@
 
 import { Handle } from "./handle";
 
+declare interface ubersplat extends handle { __ubersplat: never; }
+
+declare function CreateUbersplat(x: number, y: number, name: string, red: number, green: number, blue: number, alpha: number, forcePaused: boolean, noBirthTime: boolean): ubersplat;
+declare function DestroyUbersplat(whichSplat: ubersplat): void;
+declare function ResetUbersplat(whichSplat: ubersplat): void;
+declare function FinishUbersplat(whichSplat: ubersplat): void;
+declare function ShowUbersplat(whichSplat: ubersplat, flag: boolean): void;
+declare function SetUbersplatRender(whichSplat: ubersplat, flag: boolean): void;
+declare function SetUbersplatRenderAlways(whichSplat: ubersplat, flag: boolean): void;
+
 export class Ubersplat extends Handle<ubersplat> {
 
   constructor(x: number, y: number, name: string, red: number, green: number, blue: number, alpha: number, forcePaused: boolean, noBirthTime: boolean) {

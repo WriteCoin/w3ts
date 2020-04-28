@@ -4,6 +4,87 @@ import { Force } from "./force";
 import { Handle } from "./handle";
 import { Point } from "./point";
 
+declare interface agent extends handle { __agent: never; }
+declare interface player extends agent { __player: never; }
+declare interface location extends agent { __location: never; }
+declare interface race extends handle { __race: never; }
+declare interface playerstate extends handle { __playerstate: never; }
+declare interface force extends agent { __force: never; }
+declare interface playerscore extends handle { __playerscore: never; }
+declare interface alliancetype extends handle { __alliancetype: never; }
+declare interface playergameresult extends handle { __playergameresult: never; }
+declare interface playercolor extends handle { __playercolor: never; }
+declare interface mapcontrol extends handle { __mapcontrol: never; }
+declare interface racepreference extends handle { __racepreference: never; }
+declare interface playerslotstate extends handle { __playerslotstate: never; }
+
+declare function Player(number: number): player;
+declare function GetLocalPlayer(): player;
+declare function IsPlayerAlly(whichPlayer: player, otherPlayer: player): boolean;
+declare function IsPlayerEnemy(whichPlayer: player, otherPlayer: player): boolean;
+declare function IsPlayerInForce(whichPlayer: player, whichForce: force): boolean;
+declare function IsPlayerObserver(whichPlayer: player): boolean;
+declare function IsVisibleToPlayer(x: number, y: number, whichPlayer: player): boolean;
+declare function IsLocationVisibleToPlayer(whichLocation: location, whichPlayer: player): boolean;
+declare function IsFoggedToPlayer(x: number, y: number, whichPlayer: player): boolean;
+declare function IsLocationFoggedToPlayer(whichLocation: location, whichPlayer: player): boolean;
+declare function IsMaskedToPlayer(x: number, y: number, whichPlayer: player): boolean;
+declare function IsLocationMaskedToPlayer(whichLocation: location, whichPlayer: player): boolean;
+declare function GetPlayerRace(whichPlayer: player): race;
+declare function GetPlayerId(whichPlayer: player): number;
+declare function GetPlayerUnitCount(whichPlayer: player, includeIncomplete: boolean): number;
+declare function GetPlayerTypedUnitCount(whichPlayer: player, unitName: string, includeIncomplete: boolean, includeUpgrades: boolean): number;
+declare function GetPlayerStructureCount(whichPlayer: player, includeIncomplete: boolean): number;
+declare function GetPlayerState(whichPlayer: player, whichPlayerState: playerstate): number;
+declare function GetPlayerScore(whichPlayer: player, whichPlayerScore: playerscore): number;
+declare function GetPlayerAlliance(sourcePlayer: player, otherPlayer: player, whichAllianceSetting: alliancetype): boolean;
+declare function GetPlayerHandicap(whichPlayer: player): number;
+declare function GetPlayerHandicapXP(whichPlayer: player): number;
+declare function GetPlayerHandicapReviveTime(whichPlayer: player): number;
+declare function GetPlayerHandicapDamage(whichPlayer: player): number;
+declare function SetPlayerHandicap(whichPlayer: player, handicap: number): void;
+declare function SetPlayerHandicapXP(whichPlayer: player, handicap: number): void;
+declare function SetPlayerHandicapReviveTime(whichPlayer: player, handicap: number): void;
+declare function SetPlayerHandicapDamage(whichPlayer: player, handicap: number): void;
+declare function SetPlayerTechMaxAllowed(whichPlayer: player, techid: number, maximum: number): void;
+declare function GetPlayerTechMaxAllowed(whichPlayer: player, techid: number): number;
+declare function AddPlayerTechResearched(whichPlayer: player, techid: number, levels: number): void;
+declare function SetPlayerTechResearched(whichPlayer: player, techid: number, setToLevel: number): void;
+declare function GetPlayerTechResearched(whichPlayer: player, techid: number, specificonly: boolean): boolean;
+declare function GetPlayerTechCount(whichPlayer: player, techid: number, specificonly: boolean): number;
+declare function SetPlayerUnitsOwner(whichPlayer: player, newOwner: number): void;
+declare function CripplePlayer(whichPlayer: player, toWhichPlayers: force, flag: boolean): void;
+declare function SetPlayerAbilityAvailable(whichPlayer: player, abilid: number, avail: boolean): void;
+declare function SetPlayerState(whichPlayer: player, whichPlayerState: playerstate, value: number): void;
+declare function RemovePlayer(whichPlayer: player, gameResult: playergameresult): void;
+declare function CachePlayerHeroData(whichPlayer: player): void;
+declare function SetPlayerColor(whichPlayer: player, color: playercolor): void;
+declare function SetPlayerAlliance(sourcePlayer: player, otherPlayer: player, whichAllianceSetting: alliancetype, value: boolean): void;
+declare function SetPlayerTaxRate(sourcePlayer: player, otherPlayer: player, whichResource: playerstate, rate: number): void;
+declare function SetPlayerRacePreference(whichPlayer: player, whichRacePreference: racepreference): void;
+declare function SetPlayerRaceSelectable(whichPlayer: player, value: boolean): void;
+declare function SetPlayerController(whichPlayer: player, controlType: mapcontrol): void;
+declare function SetPlayerName(whichPlayer: player, name: string): void;
+declare function SetPlayerOnScoreScreen(whichPlayer: player, flag: boolean): void;
+declare function GetPlayerTeam(whichPlayer: player): number;
+declare function GetPlayerStartLocation(whichPlayer: player): number;
+declare function GetPlayerColor(whichPlayer: player): playercolor;
+declare function GetPlayerSelectable(whichPlayer: player): boolean;
+declare function GetPlayerController(whichPlayer: player): mapcontrol;
+declare function GetPlayerSlotState(whichPlayer: player): playerslotstate;
+declare function GetPlayerTaxRate(sourcePlayer: player, otherPlayer: player, whichResource: playerstate): number;
+declare function IsPlayerRacePrefSet(whichPlayer: player, pref: racepreference): boolean;
+declare function GetPlayerName(whichPlayer: player): string;
+declare function GetStartLocationX(whichStartLocation: number): number;
+declare function GetStartLocationY(whichStartLocation: number): number;
+declare function GetStartLocationLoc(whichStartLocation: number): location;
+declare function BlzGetPlayerTownHallCount(whichPlayer: player): number;
+declare function BlzDecPlayerTechResearched(whichPlayer: player, techid: number, levels: number): void;
+declare function RemoveAllGuardPositions(num: player): void;
+declare function GetFilterPlayer(): player;
+declare function GetEnumPlayer(): player;
+declare function GetTriggerPlayer(): player;
+
 export class MapPlayer extends Handle<player> {
 
   private constructor(index: number) {

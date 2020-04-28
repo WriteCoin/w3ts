@@ -2,6 +2,16 @@
 
 import { Handle } from "./handle";
 
+declare interface agent extends handle { __agent: never; }
+declare interface location extends agent { __location: never; }
+
+declare function Location(x: number, y: number): location;
+declare function RemoveLocation(whichLocation: location): void;
+declare function MoveLocation(whichLocation: location, newX: number, newY: number): void;
+declare function GetLocationX(whichLocation: location): number;
+declare function GetLocationY(whichLocation: location): number;
+declare function GetLocationZ(whichLocation: location): number;
+
 export class Point extends Handle<location> {
 
   constructor(x: number, y: number) {

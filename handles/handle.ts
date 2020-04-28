@@ -2,6 +2,8 @@
 
 const map: WeakMap<handle, any> = new WeakMap<handle, any>();
 
+declare function GetHandleId(h:handle):number
+
 export class Handle<T extends handle> {
 
   public readonly handle: T;

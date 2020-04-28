@@ -3,6 +3,43 @@
 import { Handle } from "./handle";
 import { MapPlayer } from "./player";
 
+declare interface agent extends handle { __agent: never; }
+declare interface widget extends agent { __widget: never; }
+declare interface unit extends widget { __unit: never; }
+declare interface gamecache extends agent { __gamecache: never; }
+declare interface player extends agent { __player: never; }
+
+declare function ReloadGameCachesFromDisk(): boolean;
+declare function InitGameCache(campaignFile: string): gamecache;
+declare function SaveGameCache(whichCache: gamecache): boolean;
+declare function StoreInteger(cache: gamecache, missionKey: string, key: string, value: number): void;
+declare function StoreReal(cache: gamecache, missionKey: string, key: string, value: number): void;
+declare function StoreBoolean(cache: gamecache, missionKey: string, key: string, value: boolean): void;
+declare function StoreUnit(cache: gamecache, missionKey: string, key: string, whichUnit: unit): boolean;
+declare function StoreString(cache: gamecache, missionKey: string, key: string, value: string): boolean;
+declare function SyncStoredInteger(cache: gamecache, missionKey: string, key: string): void;
+declare function SyncStoredReal(cache: gamecache, missionKey: string, key: string): void;
+declare function SyncStoredBoolean(cache: gamecache, missionKey: string, key: string): void;
+declare function SyncStoredUnit(cache: gamecache, missionKey: string, key: string): void;
+declare function SyncStoredString(cache: gamecache, missionKey: string, key: string): void;
+declare function HaveStoredInteger(cache: gamecache, missionKey: string, key: string): boolean;
+declare function HaveStoredReal(cache: gamecache, missionKey: string, key: string): boolean;
+declare function HaveStoredBoolean(cache: gamecache, missionKey: string, key: string): boolean;
+declare function HaveStoredUnit(cache: gamecache, missionKey: string, key: string): boolean;
+declare function HaveStoredString(cache: gamecache, missionKey: string, key: string): boolean;
+declare function FlushGameCache(cache: gamecache): void;
+declare function FlushStoredMission(cache: gamecache, missionKey: string): void;
+declare function FlushStoredInteger(cache: gamecache, missionKey: string, key: string): void;
+declare function FlushStoredReal(cache: gamecache, missionKey: string, key: string): void;
+declare function FlushStoredBoolean(cache: gamecache, missionKey: string, key: string): void;
+declare function FlushStoredUnit(cache: gamecache, missionKey: string, key: string): void;
+declare function FlushStoredString(cache: gamecache, missionKey: string, key: string): void;
+declare function GetStoredInteger(cache: gamecache, missionKey: string, key: string): number;
+declare function GetStoredReal(cache: gamecache, missionKey: string, key: string): number;
+declare function GetStoredBoolean(cache: gamecache, missionKey: string, key: string): boolean;
+declare function GetStoredString(cache: gamecache, missionKey: string, key: string): string;
+declare function RestoreUnit(cache: gamecache, missionKey: string, key: string, forWhichPlayer: player, x: number, y: number, facing: number): unit;
+
 export class GameCache extends Handle<gamecache> {
 
   public readonly filename: string;
